@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIGITAL DEFENDER | Arcade Action Game</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a0033 100%);
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #00ffff;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #gameContainer {
+            position: relative;
+            background: rgba(10, 14, 39, 0.9);
+            border: 3px solid #ff00ff;
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.3);
+            padding: 20px;
+        }
+        
+        #p5-container {
+            position: relative;
+            background: #000;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 800px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #ui {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #00ffff;
+            font-size: 14px;
+            z-index: 10;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        .stat {
+            margin: 0 15px;
+        }
+        
+        .stat-value {
+            color: #ffff00;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        #gameOver {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 3px solid #ff00ff;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 0 60px rgba(255, 0, 255, 0.5);
+        }
+        
+        #gameOver.show {
+            display: block;
+            animation: glitch-appear 0.3s;
+        }
+        
+        #gameOver h1 {
+            color: #ff00ff;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        #gameOver p {
+            color: #00ffff;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        
+        #restartBtn {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: #ff00ff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        #restartBtn:hover {
+            background: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+        
+        @keyframes glitch-appear {
+            0% { opacity: 0; transform: translate(-50%, -55%) scale(0.8); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        #instructions {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            color: #00ff00;
+            font-size: 12px;
+            text-align: center;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="ui">
+            <div class="stat">WAVE: <span class="stat-value" id="waveDisplay">1</span></div>
+            <div class="stat">LIVES: <span class="stat-value" id="livesDisplay">3</span></div>
+            <div class="stat">SCORE: <span class="stat-value" id="scoreDisplay">0</span></div>
+            <div class="stat">HIGH: <span class="stat-value" id="highScoreDisplay">0</span></div>
+        </div>
+        <div id="p5-container"></div>
+        <div id="instructions">
+            WASD or ARROW KEYS to move | MOUSE to aim/shoot | Defend against the glitch entities!
+        </div>
+    </div>
+    
+    <div id="gameOver">
+        <h1 id="gameOverTitle">SYSTEM FAILURE</h1>
+        <p id="gameOverMessage">Game Over</p>
+        <p>Score: <span id="finalScore">0</span> | Waves: <span id="wavesSurvived">1</span></p>
+        <p>High Score: <span id="highScoreFinal">0</span></p>
+        <button id="restartBtn">RESTART DEFENSE</button>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
